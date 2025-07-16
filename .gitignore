@@ -1,0 +1,17 @@
+# java maven
+target/
+#compiled binaries not needed in git
+*.class
+*.jar
+*.war
+*log
+
+# === IntelliJ IDEA ===
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+
+.env
