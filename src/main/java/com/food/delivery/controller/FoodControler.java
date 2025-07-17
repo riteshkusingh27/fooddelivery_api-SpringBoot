@@ -42,8 +42,27 @@ public class FoodControler {
         return response;
 
     }
+     ///  all exsting food from the db
 @GetMapping
     public List<FoodResponse> readFoods(){
          return foodService.readFoods();
     }
+
+
+     ///  food by id
+   @GetMapping("/{id}")
+    public FoodResponse readFood(@PathVariable String id){
+    return foodService.readFood(id);
+
+    }
+
+     // delete the food from the database and from s3 bucket
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteFood(@PathVariable String id){
+
+       foodService.deleteFood(id);
+
+    }
+
 }

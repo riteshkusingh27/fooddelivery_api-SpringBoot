@@ -11,18 +11,18 @@ import software.amazon.awssdk.services.s3.S3Client;
 
 @Configuration
 public class AWSconfig {
-     @Value("${aws.access.key}")
-    private String accessKey ;
+    @Value("${aws.access.key}")
+    private String accessKey;
     @Value("${aws.secret.key}")
-    private String secretKey ;
+    private String secretKey;
     @Value("${aws.region}")
-    private String region  ;
+    private String region;
 
- @Bean
-    public S3Client s3client(){
+    @Bean
+    public S3Client s3client() {
         return S3Client.builder()
                 .region(Region.of(region))
-                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey,secretKey)))
+                .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(accessKey, secretKey)))
                 .build();
 
         // upload images to the s3 bucket using s3 client
