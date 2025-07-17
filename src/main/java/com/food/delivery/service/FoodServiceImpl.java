@@ -18,7 +18,9 @@ import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -71,6 +73,14 @@ public class FoodServiceImpl implements FoodService{
     // converting the saved Enity into FoodResponse DTO
         return convertToResponse(newFoodEntity);
 
+
+    }
+
+    @Override
+    public List<FoodResponse> readFoods() {
+        ///  Food entity from the database response
+       List<FoodEnity> databaseEntries = foodrepo.findAll();
+    return  databaseEntries.stream().map(this::convertToResponse).collect(Collectors.toList());
 
     }
 
