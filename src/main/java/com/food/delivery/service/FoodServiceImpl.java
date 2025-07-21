@@ -107,7 +107,7 @@ public class FoodServiceImpl implements FoodService {
         FoodResponse fr = readFood(id);
         String imageUrl = fr.getImageUrl();
       String filename =   imageUrl.substring(imageUrl.lastIndexOf("/")+1);
-      // if the file is delteted in the aws s3 bucket
+      // if the file is deleted the aws s3 bucket
      boolean isFileDeleted =  deleteFilename(filename);   //delete file from s3 bucket
      if(isFileDeleted){
          foodrepo.deleteById(fr.getId());

@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/foods")
+@CrossOrigin("*")   // allowed for every  frontend origin
 public class FoodControler {
 
     private final FoodService foodService;
@@ -58,7 +59,7 @@ public class FoodControler {
 
      // delete the food from the database and from s3 bucket
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)   // 204 code no content
     public void deleteFood(@PathVariable String id){
 
        foodService.deleteFood(id);
