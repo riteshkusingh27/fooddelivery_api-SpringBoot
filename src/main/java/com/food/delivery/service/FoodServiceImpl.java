@@ -38,12 +38,14 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public String uploadFile(MultipartFile file) {
+        // get the file extension name from the multipart file
         String filenameExtension = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 
 //                      random uuid and the file extension
         String key = UUID.randomUUID().toString() + "." + filenameExtension;
 
         try {
+              // put object request to put the image to the s3 cloud
             PutObjectRequest putObjectRequest = PutObjectRequest.builder().
                     bucket(bucketName)
                     .key(key)

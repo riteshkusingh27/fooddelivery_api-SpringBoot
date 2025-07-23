@@ -7,6 +7,7 @@ import com.food.delivery.io.UserResponse;
 import com.food.delivery.repository.UserRepo;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ public class UserServceImpl implements UserService{
     UserRepo userRepo;
     @Autowired
     private  final PasswordEncoder passwordEncoder;
+    private final AuthenticationFacade authenticationFacade;
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
       UserEntity newUser =   convertToEntity(userRequest);
@@ -25,6 +27,13 @@ public class UserServceImpl implements UserService{
   return   convertToRespone(newUser);
 
 
+    }
+
+    @Override
+    public String findByUserId() {
+        String loggedemail = authenticationFacade.getAuthentication().getName();
+       UserEntity loggedUser = userRepo.findByEmail(loggedemail).orElseThrow(() -> new  UsernameNotFoundException("User not found exception"));
+             return loggedUser.getId();
     }
 
     private UserEntity convertToEntity(UserRequest request){
@@ -43,4 +52,6 @@ public class UserServceImpl implements UserService{
                 .build();
 
     }
+
+
 }
