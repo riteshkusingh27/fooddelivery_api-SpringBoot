@@ -6,13 +6,16 @@ import com.food.delivery.io.UserRequest;
 import com.food.delivery.io.UserResponse;
 import com.food.delivery.repository.UserRepo;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class UserServceImpl implements UserService{
     UserRepo userRepo;
-
+    @Autowired
+    private  final PasswordEncoder passwordEncoder;
     @Override
     public UserResponse registerUser(UserRequest userRequest) {
       UserEntity newUser =   convertToEntity(userRequest);
@@ -27,7 +30,7 @@ public class UserServceImpl implements UserService{
     private UserEntity convertToEntity(UserRequest request){
       return   UserEntity.builder()
                 .email(request.getEmail())
-                .password(request.getPassword())
+                .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
                 .build();
     }

@@ -5,6 +5,7 @@ import com.food.delivery.io.UserResponse;
 import com.food.delivery.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class UserController {
     private UserService userService;
+
 
 
     @PostMapping("/register")
