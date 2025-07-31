@@ -7,24 +7,24 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
-@Document(collection="order")
+
+@Document(collection = "order")
 @Data
 @Builder
 public class OrderEntity {
     @Id
-    private String id ;
-    private String userId ;
-    private String userAddress ;
+    private String id;
+    private String userId;
+    private String userAddress;
     private
-    String phoneNumber ;
-    private String email ;
-    private List<OrderItem> orderitemslist ;
-    private double amount ;
-    private String paymentStatus ;
-    private String razorpayId ;
+    String phoneNumber;
+    private String email;
+    private List<OrderItem> orderitemslist;
+    private double amount;
+    private String paymentStatus;
+    private String razorpayId;
     private String razorpaySignature;
-    private String orderStatus ;
-
+    private String orderStatus;
 
 
 }

@@ -12,8 +12,7 @@ public class OrderResponse {
     private String id ;
     private String userId ;
     private String userAddress ;
-    private
-    String phoneNumber ;
+    private String phoneNumber ;
     private String email ;
 
     private String paymentStatus ;
