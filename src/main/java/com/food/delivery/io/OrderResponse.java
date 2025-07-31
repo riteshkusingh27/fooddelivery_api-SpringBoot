@@ -19,6 +19,8 @@ public class OrderResponse {
     private String razorpayId ;
 
     private String orderStatus ;
+    // order items for admin panel
+    private List<OrderItem> orderItems;
 }
 
 
