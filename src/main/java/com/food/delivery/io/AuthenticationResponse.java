@@ -1,9 +1,9 @@
 package com.food.delivery.io;
 
 
+import com.food.delivery.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 
@@ -12,4 +12,6 @@ public class AuthenticationResponse {
 
     private String email ;
     private String token ;
+    private String userName ;
+
 }

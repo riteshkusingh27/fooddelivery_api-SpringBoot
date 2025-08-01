@@ -23,7 +23,9 @@ public class CartController {
 
     @PostMapping
     public CartResponse addToCart(@RequestBody CartRequest request) {
+
         String foodId = request.getFoodId();
+        System.out.println(request);
         if (foodId == null || foodId.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Json Format");
         }
@@ -46,6 +48,7 @@ public class CartController {
     @PostMapping("/remove")
     @ResponseStatus(HttpStatus.CREATED)
     public CartResponse removeFromCart(@RequestBody CartRequest request) {
+
         String foodId = request.getFoodId();
         if (foodId == null || foodId.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Json Format");

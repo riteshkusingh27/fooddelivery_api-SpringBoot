@@ -48,15 +48,14 @@ public class OrderServiceImpl implements OrderService {
     public OrderResponse createOrderWithPayment(OrderRequest request) throws RazorpayException {
         OrderEntity neworder = convertToEntity(request);
         neworder = orderrepo.save(neworder);
-
         System.out.println(razorpayid);
         System.out.println(razorpaysecret);
         // create razorpay payment order
         RazorpayClient client = new RazorpayClient(razorpayid, razorpaysecret);
         // create json response to razorpay client
-
         JSONObject orderRequest = new JSONObject();
-        orderRequest.put("amount", neworder.getAmount());
+        orderRequest.put("amount", neworder.getAmount()*100);
+        System.out.println(neworder.getAmount());
         orderRequest.put("currency", "INR");
         // order id created ;
         Order order = client.orders.create(orderRequest);
@@ -74,12 +73,13 @@ public class OrderServiceImpl implements OrderService {
     @Transactional    // since the db call are bundle into single transaction if one fails it rollbacks giving consistency
     public void verifyPayent(Map<String, String> paymentData, String status) {
         String razorpayOrderId = paymentData.get("razorpay_order_id");
+        System.out.println(razorpayOrderId);
         OrderEntity existingOrder = orderrepo.findByRazorpayId(razorpayOrderId).orElseThrow(() -> new RuntimeException("Order not found "));
         existingOrder.setPaymentStatus(status);
         existingOrder.setRazorpaySignature(paymentData.get("razorpay_signature"));
         existingOrder.setRazorpayPaymentId(paymentData.get("razorpay_payment_id"));
         orderrepo.save(existingOrder);
-
+                 System.out.println(paymentData);
            if("paid".equalsIgnoreCase(status)){
 
                //if the payment is succcessful will remove  the cart
