@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.food.delivery.io.FoodRequest;
 import com.food.delivery.io.FoodResponse;
 import com.food.delivery.service.FoodService;
+import okhttp3.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +27,12 @@ public class FoodControler {
     }
 
     @PostMapping
-    public FoodResponse addFood(@RequestPart("food") String foodString ,
+    public ResponseEntity<?> addFood(@RequestPart("food") String foodString ,
                                @RequestPart("file") MultipartFile file  ){
+          long maxFileSize = 3*1024*1024;
+          if(file.getSize()>maxFileSize){
+              return   ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body("File size exceeds the maximum Limit");
+          }
         ObjectMapper objmapper = new ObjectMapper();
         FoodRequest request = null ;
         try {
@@ -38,9 +43,10 @@ public class FoodControler {
         catch(Exception e){
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST , "Invalid Json Format");
 
+
         }
-       FoodResponse response =  foodService.addFood(request,file);
-        return response;
+       FoodResponse res =  foodService.addFood(request,file);
+        return ResponseEntity.status(HttpStatus.CREATED).body(res);
 
     }
      ///  all exsting food from the db
