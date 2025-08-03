@@ -65,7 +65,7 @@ public class Securityconfig {
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("https://cravecartjun.netlify.app/" , "https://craveacart-admin.netlify.app/" ,"http://localhost:*"));
+        corsConfiguration.setAllowedOrigins(List.of("https://cravecartjun.netlify.app/" , "https://craveacart-admin.netlify.app/" ,"http://localhost:5173/"));
         corsConfiguration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS", "PATCH"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization" , "Content-Type"));
         corsConfiguration.setAllowCredentials(true);
