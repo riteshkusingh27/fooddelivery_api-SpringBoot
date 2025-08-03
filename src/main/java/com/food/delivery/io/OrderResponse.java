@@ -14,7 +14,7 @@ public class OrderResponse {
     private String userAddress ;
     private String phoneNumber ;
     private String email ;
-
+   private String amount ;
     private String paymentStatus ;
     private String razorpayId ;
 

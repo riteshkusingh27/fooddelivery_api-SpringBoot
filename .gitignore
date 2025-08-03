@@ -6,6 +6,8 @@ target/
 *.war
 *log
 
+.env
+
 # === IntelliJ IDEA ===
 .idea/
 *.iml

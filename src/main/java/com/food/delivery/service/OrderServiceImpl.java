@@ -129,6 +129,8 @@ public class OrderServiceImpl implements OrderService {
                 .phoneNumber(neworder.getPhoneNumber())
                 .email(neworder.getEmail())
                 .orderItems(neworder.getOrderitemslist())
+                .amount(String.valueOf(neworder.getAmount()))
+                .orderStatus(neworder.getOrderStatus())
 
                 .build();
     }
