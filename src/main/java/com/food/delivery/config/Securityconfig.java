@@ -45,7 +45,7 @@ public class Securityconfig {
     public SecurityFilterChain sfc (HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth ->auth.requestMatchers("/api/register","/api/login", "/api/foods/**", "/api/orders/all","/api/orders/status/**", "/api/foods/").permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth ->auth.requestMatchers("/api/register","/api/login", "/api/foods/**", "/api/orders/all","/api/orders/status/**", "/api/foods/*").permitAll().anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
                 return http.build();
@@ -65,7 +65,7 @@ public class Securityconfig {
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("https://cravecartjun.netlify.app/" , "https://craveacart-admin.netlify.app/" ,"http://localhost:5173"));
+        corsConfiguration.setAllowedOrigins(List.of("https://cravecartjun.netlify.app/" , "https://craveacart-admin.netlify.app/" ,"http://localhost:5173", "http://localhost:5174"));
         corsConfiguration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS", "PATCH"));
         corsConfiguration.setAllowedHeaders(List.of("Authorization" , "Content-Type"));
         corsConfiguration.setAllowCredentials(true);
