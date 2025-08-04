@@ -64,7 +64,7 @@ public class FoodControler {
     }
 
      // delete the food from the database and from s3 bucket
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)   // 204 code no content
     public void deleteFood(@PathVariable String id){
 
